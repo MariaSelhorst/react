@@ -1,0 +1,127 @@
+db.getMongo().getDBs();
+
+use('db_func')
+
+db.people.insertOne({   
+    name: "Alisson",
+    lastname: "Ferro",
+    salary: 1234
+})
+
+db.people.insertMany([
+    {
+        name: 'Queila',
+        lastname: 'Lima',
+        salary: 1234
+    },
+    {
+        name: 'Donathan',
+        lastname: 'Goncalves',
+        salary: 1234
+    },
+])
+
+const arrpeople = [
+    {
+    name: 'Luis',
+    lastname: 'Balem',
+    salary: 1234
+    },
+    {
+        name: 'Leonardo',
+        lastname: 'Trevisan',
+        salary: 1234
+    },
+]
+    db.people.insertMany(arrpeople)
+
+db.people.find()
+
+db.people.find({ name: 'Alisson' })
+
+db.people.find({ name: /n/ });
+
+db.people.find({ $and: [{ name: 'Alisson' }, { lastname: 'Balem' }] })
+
+db.people.find({ salary: { $gt: 123 } })
+
+db.people.find({ salary: { $gte: 123 } }, { name: 1, lastname:1 })
+
+db.people.updateOne(
+    { _id: ObjectId('66cc8051ee6f0deaa622c306') },
+    { $set:{ name:"Alisson Alterado" }}
+);
+
+db.people.find(
+    { _id: ObjectId('66cc8051ee6f0deaa622c306') }
+);
+
+db.people.updateMany(
+    { salary: 1234 },
+    { $set:{ salary:12345 }}
+);
+
+db.people.deleteOne({
+    name: /Alisson/
+})
+
+db.people.deleteMany({
+    name: /n/
+})
+
+desafiooooo
+
+use('db_catalog')
+
+db.stock.insertMany([
+    {
+        name: 'tapete felpudo',
+        description: 'tapete felpudo de algodão preto',
+        price: 25,
+        category: 'home care', 
+        quantity: 8
+    },
+    {
+        name: 'pano de prato',
+        description: 'pano de prato 30x15cm branco',
+        price: 12,
+        category: 'home care', 
+        quantity: 50
+    },
+    {
+        name: 'edredom casal',
+        description: 'endredom casal listrado verde e branco',
+        price: 12,
+        category: 'home care', 
+        quantity: 50
+    },
+    {
+        name: 'casaco inverno peluciado',
+        description: 'casaco inverno peluciado verde G',
+        price: 250,
+        category: 'clothing', 
+        quantity: 11
+    },
+    {
+        name: 'camisa polo',
+        description: 'camisa polo vermelha GG',
+        price: 150,
+        category: 'clothing', 
+        quantity: 50
+    },
+])
+
+use('db_catalog')
+db.stock.find({ category: 'home care' }, { name: 1, category:1 })
+
+db.stock.find()
+
+db.stock.updateOne(
+    { _id: ObjectId('66cc8afcc5db819874b7ae08') },
+    { $set:{ quantity: 0 }}
+);
+
+db.stock.deleteOne({
+    quantity: 0
+})
+
